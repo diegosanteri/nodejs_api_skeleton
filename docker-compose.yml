@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+
+  myapp-api:
+    build: ./
+    image: diegosanteri/myapp
+    container_name: "myapp-api"
+    environment:
+      - MONGO_URL=mongodb-myapp
+    expose:
+      - "3000"
+    ports:
+      - "3000:3000"
+    restart: always
+    depends_on:
+      - "mongodb-myapp"
+
+  mongodb-myapp:
+    image: mongo:latest
+    container_name: "mongodb-myapp"
+    environment:
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/null
+    volumes:
+      - /home/data/db:/home/data/db
+    expose:
+      - "27017"
+    command: mongod --smallfiles --logpath=/dev/null # --quiet
+    restart: always

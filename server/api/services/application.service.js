@@ -3,8 +3,9 @@ import Q from 'q'
 import fs from "fs";
 
 import internalError from './../context/internal.error.context';
+import appRoot from 'app-root-path';
 
-const INITIAL_DATA_PATH = 'server/common/data.json';
+const INITIAL_DATA_PATH = appRoot + '/server/common/data.json';
 const CHARSET = "utf-8";
 const ADMIN_FLAG_PERMISSION = "admin.";
 

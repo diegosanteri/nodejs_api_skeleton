@@ -11,6 +11,7 @@
     "test": "export NODE_ENV=test && node build.js &&  mocha -t 100000 --compilers js:babel-register"
   },
   "dependencies": {
+    "app-root-path": "^2.0.1",
     "async-parallel": "^1.2.3",
     "await-fs": "^1.0.0",
     "bcrypt": "^1.0.3",
