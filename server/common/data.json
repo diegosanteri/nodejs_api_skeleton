@@ -1,0 +1,22 @@
+{
+    "permissions": [{
+        "name": "user_permission",
+        "roles": []
+    }, {
+        "name": "admin_permission",
+        "roles": []
+    }],
+    "roles": [{
+        "name": "user.read"
+    }, {
+        "name": "user.delete"
+    }, {
+        "name": "user.write"
+    },{
+        "name": "admin.read"
+    }, {
+        "name": "admin.delete"
+    }, {
+        "name": "admin.write"
+    }]
+}

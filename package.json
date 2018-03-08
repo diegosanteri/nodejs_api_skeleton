@@ -1,0 +1,62 @@
+{
+  "name": "myapp",
+  "version": "1.0.0",
+  "description": "myapp skeleton",
+  "main": "index.js",
+  "scripts": {
+    "preinstall": "npm i mongodb-download@2.2.3",
+    "start": "cd build && node main",
+    "dev": "node build.js && backpack dev | pino -o 'short'",
+    "test": "export NODE_ENV=test && node build.js &&  mocha -t 100000 --compilers js:babel-register"
+  },
+  "dependencies": {
+    "async-parallel": "^1.2.3",
+    "await-fs": "^1.0.0",
+    "bcrypt": "^1.0.3",
+    "body-parser": "^1.17.2",
+    "cookie-parser": "^1.4.3",
+    "dotenv": "^4.0.0",
+    "express": "^4.15.3",
+    "express-api-error-handler": "^1.1.0",
+    "express-query-params": "^0.3.0",
+    "i18n": "^0.8.3",
+    "js-binarysearch": "^1.0.2",
+    "jsonwebtoken": "^8.1.0",
+    "mongo-sanitize": "^1.0.0",
+    "mongodb-download": "^2.2.3",
+    "mongoose": "^4.13.7",
+    "mongoose-paginate": "^5.0.3",
+    "mongoose-unique-validator": "^1.0.5",
+    "pino": "^4.7.1",
+    "q": "^1.5.1",
+    "save": "^2.3.2",
+    "source-map-support": "^0.4.15",
+    "sprintf-js": "^1.1.1",
+    "swagger-express-middleware": "^1.0.0-alpha.12"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.2.3",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "backpack-core": "^0.4.2",
+    "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
+    "eslint": "^4.5.0",
+    "eslint-config-airbnb-base": "^11.3.2",
+    "eslint-plugin-import": "^2.7.0",
+    "fb": "^2.0.0",
+    "google-auth-library": "^0.10.0",
+    "mocha": "^3.5.3",
+    "mockgoose": "^7.3.3",
+    "pre-commit": "^1.2.2",
+    "shelljs": "^0.7.8",
+    "sinon": "^4.1.2",
+    "supertest": "^3.0.0"
+  },
+  "precommit": {
+    "run": [
+      "test"
+    ]
+  },
+  "author": "Diego Santeri <diegosanteri@gmail.com> (https://github.com/diegosanteri)"
+}

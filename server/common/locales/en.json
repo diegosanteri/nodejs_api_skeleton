@@ -1,0 +1,18 @@
+{
+	"internal_error": "A critical error occured!",
+	"mongoose_required": "The field {PATH} is required.",
+	"mongoose_unique": "A record already exists with this {PATH}.",
+	"mongoose_business_error": "An error occured during the transaction.",
+	"user_notfound": "User notfound",
+	"invalid_search_query": "Invalid search parameter",
+	"body_needed": "Body is required",
+	"invalid_login": "Username or password are invalids",
+	"invalid_third_party_login": "Email is incorrect",
+	"missing_token": "Token is required",
+	"expired_jwt_token": "Expired token",
+	"invalid_jwt_token": "Invalid token",
+	"invalid_login_service": "Invalid login service",
+	"timeout_request": "Operation is timed out",
+	"third_party_token_error": "The external token is invalid or expired",
+	"permission_denied": "This token doesn't has permission to access this resource"
+}

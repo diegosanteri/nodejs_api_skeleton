@@ -1,0 +1,595 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: myapp
+  description: myapp description
+host: 127.0.0.1:3000
+schemes:
+  - http
+basePath: /api
+tags:
+  - name: Specification
+    description: The swagger API specification
+  - name: Auth
+    description: Auth operations
+  - name: Users
+    description: Users operations
+consumes:
+  - application/json
+produces:
+  - application/json
+
+paths:
+  /v1/users:
+    get:
+      tags:
+        - Users
+      operationId: getUsers
+      description: Fetch all users
+      parameters:
+        - in: header
+          name: Authorization
+          type: string
+          required: true
+        - in: query
+          name: _page
+          type: integer
+          description: Page number
+        - in: query
+          name: _perpage
+          type: integer
+          description: The numbers of items to return
+        - in: query
+          name: _search
+          type: string
+          description: search by field:search String
+      responses:
+        200:
+          description: "Users response"
+          schema:
+            $ref: "#/definitions/UserWrapper"
+        400:
+          description: "Bad request"
+          schema:
+            $ref: "#/definitions/Error"
+        401:
+          description: "Not authorized"
+          schema:
+            $ref: "#/definitions/Error"
+        403:
+          description: "Forbbiden"
+          schema:
+            $ref: "#/definitions/Error"
+        500:
+          description: "Forbbiden"
+          schema:
+            $ref: "#/definitions/Error" 
+  
+  /v1/users/me:
+     get:
+      tags:
+        - Users
+      parameters:
+        - in: header
+          name: Authorization
+          type: string
+          required: true
+      operationId: getMe
+      description: Fetch user by token
+      responses:
+        200:
+          description: "User data"
+          schema:
+            $ref: "#/definitions/UserResponse"
+        400:
+          description: "Bad request"
+          schema:
+            $ref: "#/definitions/Error"
+        401:
+          description: "Not authorized"
+          schema:
+            $ref: "#/definitions/Error"
+        403:
+          description: "Forbbiden"
+          schema:
+            $ref: "#/definitions/Error"
+        500:
+          description: "Forbbiden"
+          schema:
+            $ref: "#/definitions/Error" 
+
+  /v1/users/{userId}:
+    get:
+      tags:
+        - Users
+      operationId: getUserById
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          pattern: /^[0-9a-fA-F]{24}$/
+          description: The id of the user entity to retrieve
+          type: string
+        - in: header
+          name: Authorization
+          type: string
+          required: true
+      responses:
+        200:
+          description: "User response"
+          schema:
+            $ref: "#/definitions/UserResponse"
+        400:
+          description: "Bad request"
+          schema:
+            $ref: "#/definitions/Error"
+        401:
+          description: "Not authorized"
+          schema:
+            $ref: "#/definitions/Error"
+        403:
+          description: "Forbbiden"
+          schema:
+            $ref: "#/definitions/Error"
+        500:
+          description: "Forbbiden"
+          schema:
+            $ref: "#/definitions/Error" 
+    put:
+      tags:
+        - Users
+      operationId: updateUser
+      description: update a user
+      parameters:
+        - in: header
+          name: Authorization
+          type: string
+          required: true
+        - name: userId
+          in: path
+          pattern: /^[0-9a-fA-F]{24}$/
+          required: true
+          description: The id of the existent user entity
+          type: string
+        - name: user
+          in: body
+          description: User data
+          required: true
+          schema: 
+            $ref: "#/definitions/UserUpdateRequest"
+      responses:
+        204:
+          description: Returns empty
+        400:
+          description: "Bad request"
+          schema:
+            $ref: "#/definitions/Error"
+        401:
+          description: "Not authorized"
+          schema:
+            $ref: "#/definitions/Error"
+        403:
+          description: "Forbbiden"
+          schema:
+            $ref: "#/definitions/Error"
+        500:
+          description: "Forbbiden"
+          schema:
+            $ref: "#/definitions/Error" 
+    delete:
+      tags:
+        - Users
+      operationId: deleteUser
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          pattern: /^[0-9a-fA-F]{24}$/
+          description: The id of the user entity to retrieve
+          type: string
+        - in: header
+          name: Authorization
+          type: string
+          required: true
+      responses:
+        204:
+          description: Returns empty
+        400:
+          description: "Bad request"
+          schema:
+            $ref: "#/definitions/Error"
+        401:
+          description: "Not authorized"
+          schema:
+            $ref: "#/definitions/Error"
+        403:
+          description: "Forbbiden"
+          schema:
+            $ref: "#/definitions/Error"
+        500:
+          description: "Forbbiden"
+          schema:
+            $ref: "#/definitions/Error" 
+  
+  /v1/auth/update-password:
+    put:
+      tags:
+        - Auth
+      description: Update user password
+      operationId: updatePassword
+      parameters:
+        - name: user
+          in: body
+          description: User data
+          required: true
+          schema: 
+            $ref: "#/definitions/UpdatePasswordRequest"
+      responses:
+        204:
+          description: Empty Response
+        400:
+          description: "Bad request"
+          schema:
+            $ref: "#/definitions/Error"
+        401:
+          description: "Not authorized"
+          schema:
+            $ref: "#/definitions/Error"
+        403:
+          description: "Forbbiden"
+          schema:
+            $ref: "#/definitions/Error"
+        500:
+          description: "Forbbiden"
+          schema:
+            $ref: "#/definitions/Error" 
+
+  /v1/auth/signup:
+    post:
+      tags:
+        - Auth
+      description: Create a new user
+      operationId: doLogout
+      parameters:
+        - name: user
+          in: body
+          description: User data
+          required: true
+          schema: 
+            $ref: "#/definitions/UserRequest"
+      responses:
+        201:
+          description: "User created"
+          schema:
+            $ref: "#/definitions/UserResponse"
+        400:
+          description: "Bad request"
+          schema:
+            $ref: "#/definitions/Error"
+        401:
+          description: "Not authorized"
+          schema:
+            $ref: "#/definitions/Error"
+        403:
+          description: "Forbbiden"
+          schema:
+            $ref: "#/definitions/Error"
+        500:
+          description: "Forbbiden"
+          schema:
+            $ref: "#/definitions/Error" 
+
+  /v1/auth/login:
+    post:
+      tags:
+        - Auth
+      description: Obtain token
+      operationId: doLogin
+      parameters:
+        - name: authData
+          in: body
+          description: Auth data
+          required: true
+          schema: 
+            $ref: "#/definitions/TokenRequest"
+      responses:
+        200:
+          description: "Token response"
+          schema:
+            $ref: "#/definitions/TokenData"
+        400:
+          description: "Bad request"
+          schema:
+            $ref: "#/definitions/Error"
+        401:
+          description: "Not authorized"
+          schema:
+            $ref: "#/definitions/Error"
+        403:
+          description: "Forbbiden"
+          schema:
+            $ref: "#/definitions/Error"
+        500:
+          description: "Forbbiden"
+          schema:
+            $ref: "#/definitions/Error" 
+  
+  /v1/auth/check:
+    get:
+      tags:
+        - Auth
+      description: Check token
+      operationId: checkToken
+      parameters:
+        - in: header
+          name: Authorization
+          type: string
+          required: true
+      responses:
+        204:
+          description: Valid Token, Body is empty
+        400:
+          description: "Bad request"
+          schema:
+            $ref: "#/definitions/Error"
+        401:
+          description: "Not authorized"
+          schema:
+            $ref: "#/definitions/Error"
+        403:
+          description: "Forbbiden"
+          schema:
+            $ref: "#/definitions/Error"
+        500:
+          description: "Forbbiden"
+          schema:
+            $ref: "#/definitions/Error" 
+
+  /v1/spec:
+    get:
+      tags:
+        - Specification
+      responses:
+        200:
+          description: Return the API specification
+
+definitions:
+
+  UpdatePasswordRequest:
+    type: object
+    title: Update Password request
+    required:
+      - userId
+      - oldPassword
+      - newPassword
+    properties:
+      userId:
+        type: string
+        pattern: /^[0-9a-fA-F]{24}$/
+        description: User's ID
+      oldPassword: 
+        type: string
+        minLength: 6
+        maxLength: 12
+        description: User's old password
+      newPassword:
+        type: string
+        minLength: 6
+        maxLength: 12
+        description: New password
+
+  TokenRequest:
+    type: object
+    title: Token request
+    required:
+      - email
+      - password
+    properties:
+      email:
+        type: string
+        format: email
+        minLength: 5
+        maxLength: 250
+        pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/
+        description: User's email
+      password:
+        type: string
+        minLength: 6
+        maxLength: 12
+        description: User's password
+  
+  TokenExternalRequest:
+    type: object
+    title: Token request
+    required:
+      - email
+      - service
+      - token
+    properties:
+      service:
+        type: string
+        enum: [facebook, google]
+        description: Service type
+      email:
+        type: string
+        format: email
+        minLength: 5
+        maxLength: 250
+        pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/
+        description: User's email
+      token:
+        type: string
+        description: Service token
+  
+  TokenData:
+    type: object
+    title: Token response
+    properties:
+      token:
+        type: string
+        description: Valid Token
+
+  UserRequest:
+    type: object
+    title: user request
+    required:
+      - firstname
+      - lastname
+      - email
+      - password
+    properties:
+      firstname:
+        type: string
+        minLength: 3
+        maxLength: 50
+        description: User's name
+      lastname:
+        type: string
+        minLength: 3
+        maxLength: 250
+        description: User's lastname
+      email:
+        type: string
+        format: email
+        minLength: 5
+        maxLength: 250
+        pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/
+        description: User's email
+      password:
+        type: string
+        minLength: 6
+        maxLength: 12
+        description: User's password
+      cellphone:
+        type: string
+        minLength: 12
+        maxLength: 13
+        description: User's cellphone
+      photo:
+        type: string
+        description: User's photo
+      description:
+        type: string
+        maxLength: 500
+        description: User's description
+  
+  UserUpdateRequest:
+    type: object
+    title: user update request
+    required:
+      - firstname
+      - lastname
+      - email
+    properties:
+      firstname:
+        type: string
+        minLength: 3
+        maxLength: 50
+        description: User's name
+      lastname:
+        type: string
+        minLength: 3
+        maxLength: 250
+        description: User's lastname
+      email:
+        type: string
+        format: email
+        minLength: 5
+        maxLength: 250
+        pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/
+        description: User's email
+      cellphone:
+        type: string
+        minLength: 12
+        maxLength: 13
+        description: User's cellphone
+      photo:
+        type: string
+        description: User's photo
+      description:
+        type: string
+        maxLength: 500
+        description: User's description
+
+  UserWrapper:
+    properties:
+      total:
+        type: integer
+        description: Total of registers in database
+      limit:
+        type: integer
+        description: Limit of registers for pages
+      offset:
+        type: integer
+        description: Number of registers to ignore
+      page:
+        type: integer
+        description: Page to show
+      pages:
+        type: integer
+        description: Total of pages in databases
+      docs: 
+        type: array
+        items:
+          $ref: "#/definitions/UserResponse"
+
+  UserResponse:
+    type: object
+    title: user response
+    required:
+      - firstname
+      - lastname
+      - email
+      - createdDate
+    properties:
+      _id: 
+        type: string
+        pattern: /^[0-9a-fA-F]{24}$/
+        description: User id
+      firstname:
+        type: string
+        minLength: 5
+        maxLength: 50
+        description: User's name
+      lastname:
+        type: string
+        minLength: 5
+        maxLength: 250
+        description: User's lastname
+      photo:
+        type: string
+        description: User's photo
+      email:
+        type: string
+        format: email
+        minLength: 5
+        maxLength: 250
+        pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/
+        description: User's email
+      cellphone:
+        type: string
+        minLength: 12
+        maxLength: 13
+        description: User's cellphone
+      description:
+        type: string
+        maxLength: 500
+        description: User's description
+      createdDate:
+        type: string
+        format: date-time
+        description: It's generated automatically
+        
+  Error:
+    type: object
+    title: Error details
+    properties:
+      code:
+        type: string
+        description: Business error code description
+      errors:
+        type: array
+        items:
+          type: string
+          description: Error description readable for humans
+        

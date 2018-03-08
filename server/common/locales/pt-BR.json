@@ -1,0 +1,18 @@
+{
+	"internal_error": "Ocorreu um erro grave",
+	"mongoose_required": "O campo {PATH} é obrigatorio",
+	"mongoose_unique": "Já existe um registo com esse {PATH}",
+	"mongoose_business_error": "Ocorreu um erro ao transacionar",
+	"user_notfound": "Usuario não foi encontrado",
+	"invalid_search_query": "Parametro de busca invalido",
+	"body_needed": "Corpo da mensagem é obrigatorio",
+	"invalid_login": "Username ou password invalidos",
+	"invalid_third_party_login": "Dados fornecidos não estão corretos",
+	"missing_token": "Token é obrigatorio",
+	"expired_jwt_token": "Token expirado",
+	"invalid_jwt_token": "Token invalido",
+	"invalid_login_service": "Serviço de login invalido",
+	"timeout_request": "Operação atingiu timeout",
+	"third_party_token_error": "O token do serviço externo é invalido ou expirou",
+	"permission_denied": "Token não tem permissão para esta operação"
+}
