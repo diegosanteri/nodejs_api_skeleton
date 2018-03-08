@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "preinstall": "npm i mongodb-download@2.2.3",
+    "compile": "node build.js && backpack build",
     "start": "cd build && node main",
     "dev": "node build.js && backpack dev | pino -o 'short'",
     "test": "export NODE_ENV=test && node build.js &&  mocha -t 100000 --compilers js:babel-register"
